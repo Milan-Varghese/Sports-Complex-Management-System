@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js" charset="UTF-8"></script></head><body>
+<body>
+<html>
+<center><head>
+<title>(Type a title for your page here)</title>
+<script type="text/javascript"> 
+function display_c(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('display_ct()',refresh)
+}
+
+function display_ct() {
+var x = new Date()
+document.getElementById('ct').innerHTML = x;
+display_c();
+ }
+</script>
+</head>
+
+<body onload=display_ct();>
+<span id='ct' ></span>
+
+</center></body>
+</html>
+<style>
+body {
+  font-family: Arial;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+<div>
+
+<h1><center><code>WELCOME TO ADMIN'S PAGE</code></center></h1>
+<html>
+<body background="adm.png">
+
+<button type="button" style="background-color:red;"
+   onclick="myFunction()">LOG OUT</button>
+
+<script>
+function myFunction() {
+  location.replace("test.html")
+}
+</script>
+
+</body>
+</html> 
+
+<hr>
+
+<h1 style="color:mediumspringgreen;"><center>SCHEDULE GENERATE</center></h1>
+<p></p><center><var>The Ultimate Version<var></center><p></p>
+
+</div>
+
+
+
+
+
+<?php
+ require('index.php');
+
+
+
+
+?>
+<!DOCTYPE html>
+<html>
+ <head>
+  <title><strong>Calendar</strong></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+  <script>
+   
+  $(document).ready(function() {
+   var calendar = $('#calendar').fullCalendar({
+    editable:true,
+    header:{
+     left:'prev,next today',
+     center:'title',
+     right:'month,agendaWeek,agendaDay'
+    },
+    events: 'load.php',
+    selectable:true,
+    selectHelper:true,
+    select: function(start, end, allDay)
+    {
+     var title = prompt("Enter Event Title");
+     if(title)
+     {
+      var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+      var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
+      $.ajax({
+       url:"insert.php",
+       type:"POST",
+       data:{title:title, start:start, end:end},
+       success:function()
+       {
+        calendar.fullCalendar('refetchEvents');
+        alert("Added Successfully");
+       }
+      })
+     }
+    },
+    editable:true,
+    eventResize:function(event)
+    {
+     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+     var title = event.title;
+     var id = event.id;
+     $.ajax({
+      url:"update.php",
+      type:"POST",
+      data:{title:title, start:start, end:end, id:id},
+      success:function(){
+       calendar.fullCalendar('refetchEvents');
+       alert('Event Update');
+      }
+     })
+    },
+
+    eventDrop:function(event)
+    {
+     var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+     var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+     var title = event.title;
+     var id = event.id;
+     $.ajax({
+      url:"update.php",
+      type:"POST",
+      data:{title:title, start:start, end:end, id:id},
+      success:function()
+      {
+       calendar.fullCalendar('refetchEvents');
+       alert("Event Updated");
+      }
+     });
+    },
+
+    eventClick:function(event)
+    {
+     if(confirm("Are you sure you want to remove it?"))
+     {
+      var id = event.id;
+      $.ajax({
+       url:"delete.php",
+       type:"POST",
+       data:{id:id},
+       success:function()
+       {
+        calendar.fullCalendar('refetchEvents');
+        alert("Event Removed");
+       }
+      })
+     }
+    },
+
+   });
+  });
+   
+  </script>
+ </head>
+ <body>
+  <br />
+  <h2 style="color:mediumspringgreen;" align="center"><a href="#">Calendar</a></h2>
+  <br />
+  <div class="container">
+   <div id="calendar"></div>
+  </div>
+ </body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table.ex1 {
+  empty-cells: hide;
+}
+
+table.ex2 {
+  empty-cells: show;
+}
+</style>
+</head>
+<body><center>
+<h1 style="color:mediumspringgreen;">ALBERTIAN SPORTS COMPLEX</h1>
+<h2>Schedule-MONTH YEAR WEEK _</h2>
+<table class="ex2" border="1">
+  <tr>
+	<td>Date</td>
+    <td>Turf1</td>
+    <td>Turf2</td>
+    <td>Court1</td>
+    <td>Court2</td>
+    <td>Court3</td>
+  </tr>
+    <form action="timetable.php" method="post">
+  <tr>
+    <td><strong>Monday<br><input type="date" name="datee1"></strong></td>
+    <td><select id="turf11" name="turf11" ><option value="HOLIDAY">HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></select></td>
+    <td><select id="turf21" name="turf21"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court11" name="court11"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court21" name="court21"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court31" name="court31"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+  </tr>
+  <tr>
+    <td><strong>Monday<br><input type="date" name="datee2"></strong></td>
+    <td><select id="turf12" name="turf12" ><option value="HOLIDAY">HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></select></td>
+    <td><select id="turf22" name="turf22"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court12" name="court12"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court22" name="court22"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court32" name="court32"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+  </tr>
+  <tr>
+    <td><strong>Monday<br><input type="date" name="datee3"></strong></td>
+    <td><select id="turf13" name="turf13" ><option value="HOLIDAY">HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></select></td>
+    <td><select id="turf23" name="turf23"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court13" name="court13"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court23" name="court23"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court33" name="court33"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+  </tr>
+  <tr>
+    <td><strong>Monday<br><input type="date" name="datee4"></strong></td>
+    <td><select id="turf14" name="turf14" ><option value="HOLIDAY">HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></select></td>
+    <td><select id="turf24" name="turf24"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court14" name="court14"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court24" name="court24"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court34" name="court34"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+  </tr>
+  <tr>
+    <td><strong>Monday<br><input type="date" name="datee5"></strong></td>
+    <td><select id="turf15" name="turf15" ><option value="HOLIDAY">HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></select></td>
+    <td><select id="turf25" name="turf25"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court15" name="court15"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court25" name="court25"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+    <td><select id="court35" name="court35"><option value="HOLIDAY"|>HOLIDAY</option><option value="S7CSE"|>S7CSE</option><option value="S5CSE"|>S5CSE</option><option value="S3CSE"|>S3CSE</option><option value="S1CSE"|>S1CSE</option><option value="S7CE"|>S7CE</option><option value="S5CE"|>S5CE</option><option value="S3CE"|>S3CE</option><option value="S1CE"|>S1CE</option><option value="S7ME"|>S7ME</option><option value="S5ME"|>S5ME</option><option value="S3ME"|>S3ME</option><option value="S1ME"|>S1ME</option><option value="S7EEE"|>S7EEE</option><option value="S5EEE"|>S5EEE</option><option value="S3EEE"|>S3EEE</option><option value="S1EEE"|>S1EEE</option><option value="S7EC"|>S7EC</option><option value="S5EC"|>S5EC</option><option value="S3EC"|>S3EC</option><option value="S1EC"|>S1EC</option></td>
+  </tr>
+</table>
+
+</center>
+</body>
+</html>
+<div><center>
+<hr>
+<h2>The Schedule Generator</h2>
+<button type="button" name="">GENERATE SCHEDULE</button>
+<input type="submit" value="Generate Schedule">
+ </form>
+</center></div>
+<br>
+</br>
+<div><center>
+PLEASE SELECT THE CLASS TO BE BANNED/REVOKE BAN:SELECT BRANCH:
+<select>
+  <option value="CSE">CSE</option>
+  <option value="CE">CE</option>
+  <option value="ME">ME</option>
+  <option value="EEE">EEE</option>
+  <option value="EC">EC</option>
+</select>
+SELECT YEAR:
+<select>
+  <option value="S7">S7</option>
+  <option value="S5">S5</option>
+  <option value="S3">S3</option>
+  <option value="S1">S1</option>
+</select>
+<select>
+  <option value="BAN">BAN</option>
+  <option value="REVOKE BAN">REVOKE BAN</option>
+</select><input type="submit" value="Submit">
+  
+</div>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br><br>
+</br>
+<hr>
+
+</html>

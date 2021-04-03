@@ -1,0 +1,323 @@
+<html>
+<body bgcolor="white">
+<font face="broadway" color="BLUE" size="8"><center><var>ALBERTIAN SPORTS COMPLEX</var></center></font>
+<style>
+.breaking-news-headline {
+  display: block;
+  position: absolute;
+  font-family: arial;
+  font-size: 13px;
+  margin-top: -22px;
+  color: white;
+  margin-left: 150px;
+  
+}
+
+.breaking-news-title {
+  background-color: #FFEA00;
+  display: block;
+  height: 20px;  
+  width: 90px;
+  font-family: arial;
+  font-size: 11px;
+  position: absolute; 
+  top: 0px;
+  margin-top: 0px;
+  margin-left: 20px;
+  padding-top: 10px;
+  padding-left: 10px;
+  z-index: 3;
+  &:before {
+    content:"";
+    position: absolute;
+    display: block;
+    width: 0px;
+    height: 0px;
+    top: 0;
+    left: -12px;
+    border-left:12px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 30px solid #FFEA00;
+  }
+  &:after {
+    content:"";
+    position: absolute;
+    display: block;
+    width: 0px;
+    height: 0px;
+    right: -12px;
+    top: 0;
+    border-right:12px solid transparent;
+    border-left: 0px solid transparent;
+    border-top: 30px solid #FFEA00;
+  }
+}
+
+#breaking-news-colour {
+  height: 30px;
+  width: 694px;
+  background-color: #3399FF;
+}
+
+#breaking-news-container {
+  height: 30px;
+  width: 694px;
+  overflow: hidden;
+  position: absolute;
+  &:before {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-color: #3399FF;
+    position: absolute;
+    z-index: 2;
+  }
+}
+
+.animated {
+  -webkit-animation-duration: 0.2s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-duration: 0.2s;
+  -moz-animation-fill-mode: both;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+}
+
+.delay-animated {
+  -webkit-animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-duration: 0.4s;
+  -moz-animation-fill-mode: both;
+  -webkit-animation-iteration-count: 1;
+  -moz-animation-iteration-count: 1;
+  -webkit-animation-delay: 0.3s; 
+  animation-delay: 0.3s;
+}
+
+.scroll-animated {
+  -webkit-animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-duration: 3s;
+  -moz-animation-fill-mode: both;
+  -webkit-animation-iteration-count: 1; 
+  -moz-animation-iteration-count: 1;
+  -webkit-animation-delay: 0.5s; 
+  animation-delay: 0.5s;
+}
+
+.delay-animated2 {
+  -webkit-animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-duration: 0.4s;
+  -moz-animation-fill-mode: both;
+  -webkit-animation-iteration-count: 1; 
+  -moz-animation-iteration-count: 1;
+  -webkit-animation-delay: 0.5s; 
+  animation-delay: 0.5s;
+}
+
+.delay-animated3 {
+  -webkit-animation-duration: 5s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-duration: 5s;
+  -moz-animation-fill-mode: both;
+  -webkit-animation-iteration-count: 1; 
+  -moz-animation-iteration-count: 1;
+  -webkit-animation-delay: 0.5s; 
+  animation-delay: 3s;
+}
+
+.fadein {
+  -webkit-animation-name: fadein;
+  -moz-animation-name: fadein;
+  -o-animation-name: fadein;
+  animation-name: fadein;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    margin-left: 1000px
+  }
+  to {
+    
+  } 
+}  
+@-moz-keyframes fadein {
+  from {
+    margin-left: 1000px
+  }
+  to {
+    
+  }  
+}
+
+.slidein {
+  -webkit-animation-name: slidein;
+  -moz-animation-name: slidein;
+  -o-animation-name: slidein;
+  animation-name: slidein;
+}
+
+@keyframes marquee {
+  0% { 
+    left: 0;
+  }
+  20% { 
+    left: 0; 
+  }
+  100% { left: -100%; }
+}
+
+.marquee {
+  animation: marquee 10s linear infinite;
+  -webkit-animation-duration: 10s;
+  -moz-animation-duration: 10s;
+  -webkit-animation-delay: 0.5s; 
+  animation-delay: 3s;
+}
+
+@-webkit-keyframes slidein {
+  from {
+    margin-left: 800px
+  }
+  to {
+    margin-top: 0px
+  } 
+}  
+@-moz-keyframes slidein {
+  from {
+    margin-left: 800px
+  }
+  to {
+    margin-top: 0px
+  }  
+}
+
+.slideup {
+  -webkit-animation-name: slideup;
+  -moz-animation-name: slideup;
+  -o-animation-name: slideup;
+  animation-name: slideup;
+}
+@-webkit-keyframes slideup {
+  from {
+    margin-top: 30px
+  }
+  to {
+    margin-top: 0;
+  } 
+}  
+@-moz-keyframes slideup {
+  from {
+    margin-top: 30px
+  }
+  to {
+    margin-top: 0;
+  } 
+}
+</style>
+<div id="breaking-news-container">
+  <div id="breaking-news-colour" class="slideup animated">
+    
+  </div>  
+  <span class="breaking-news-title delay-animated slidein">
+      //TIMING//
+  </span> 
+  <a class="breaking-news-headline delay-animated2 fadein marquee">
+      Sports complex will be opened from 6am to 10pm
+  </a>
+</div>
+<style>
+body {
+  font-family: Arial;
+}
+
+input[type=text], select {
+  width: 50%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 50%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div.container {
+  border-radius: 3px;
+  background-color: #f2f2f2;
+  padding: 1px;
+}
+</style>
+<center>
+<div>
+<body background="back.png">
+<hr>
+<h1 style="color:aqua;"><bold>Booking Form</bold></h1>
+<p><font color="aqua"><bold>the booking person's details:</bold></font></p>
+<link rel="stylesheet" type="text/css" href="style1.css">
+<div class="background">
+  <div class="transbox">
+<div class="container">
+  <form action="action_page.php" method="post">
+  <br><br>
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="fname" placeholder="Your name.." required>
+  <br>
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lname" placeholder="Your last name.." required>
+	<br>
+	 <label for="emailid">Email Id</label>
+    <input type="text" id="emailid" name="emailid"  placeholder="Your email id.."required>
+	<br>
+	<label for="phno">Phone Number</label>
+    <input type="text" id="phno" name="phno" placeholder="Your phone number.."required>
+    <br>
+    <label for="tb">Choice</label>
+    <select id="tb" name="tb">
+      <option type="text" value=" turf 1"> TURF 1</option>
+      <option type="text" value=" turf 2">TURF 2</option>
+      <option type="text" value="badminton 1">BADMINTON 1</option>
+	  <option type="text" value="badminton 2">BADMINTON 2</option>
+	  <option type="text" value="badminton 3">BADMINTON 3</option>
+    </select>
+	<br>
+	<label for="datte">Date</label>
+	<input type="text" name="datte"  id="datte" placeholder="DD-MM-YYYY" required 
+pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" 
+title="Enter a date in this format YYYY-MM-DD"/ required>
+    <br>
+    <label for="fromtime">From</label>
+	<input type="text" name="fromtime" id="fromtime" placeholder="HH:MM" step="5">
+	<br>
+	<label for="totime">To</label>
+	<input type="text" name="totime" id="totime" placeholder="HH:MM" step="5">
+	<p style="color:red;">Turf and Badminton court will not be available during 16:30 IST to 18:00 IST. Bookings will be invalid during this time.</p>
+<script>
+function myFunction() {
+  var x = document.getElementById("myTime").step;
+  document.getElementById("demo").innerHTML = x;
+}
+</script>
+  <input type="submit" name="submit" value="Submit">
+  </form>
+  </div>
+</div>
+  </div>
+</div>
+</center>
+</body></html>

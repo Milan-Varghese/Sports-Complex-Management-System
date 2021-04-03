@@ -1,0 +1,173 @@
+<!DOCTYPE html >
+<html>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style2.css">      
+<head>
+<title>LOGIN</title>
+</head>
+<body id="body_bg">
+<font face="Times New Roman" color="BLUE" size="8"><center><B>ALBERTIAN SPORTS COMPLEX</B></center></font>
+<img src="https://aisat.ac.in/wp-content/uploads/2019/01/aisatlogo1.png" srcset="https://aisat.ac.in/wp-content/uploads/2019/01/aisatlogo1.png 1x" width="540" height="74" alt="Albertian Institute of Science and Technology (AISAT) Logo" retina_logo_url="" class="fusion-standard-logo">
+<div align="right">
+<h3 style="color:#B5E51D"><font size = 5px"><pre>       Admin Login       </pre></font></h3>
+    <form id="login-form" method="post" action="authen_login.php" >
+        <table border="0.5" >
+            <tr>
+                <td><label for="user_id">User Name</label></td>
+                <td><input type="text" name="user_id" id="user_id"></td>
+            </tr>
+            <tr>
+                <td><label for="user_pass">Password</label></td>
+                <td><input type="password" name="user_pass" id="user_pass"></input></td>
+            </tr>
+<tr>				
+                <td><input type="submit" value="Submit" />
+                <td><input type="reset" value="Reset"/>			
+            </tr>
+        </table>
+    </form>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div id="id01" class="modal">
+  <form class="modal-content animate" action="admin1.html/j_security_check" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="admin.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+        
+      <button type="submit">Login</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+  </form>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js" charset="UTF-8"></script></head><body>
+<body>
+<style>
+body {
+  font-family: Arial;
+}
+
+input[type=text], select {
+  width: 50%;
+  padding: 10px 15px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 50%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div.container {
+  border-radius: 3px;
+  background-color: #f2f2f2;
+  padding: 1px;
+}
+</style>
+<div><center>
+<body><center>
+<hr>
+<h1 style="color:white;"><bold>Bookings</bold></h1>
+<p><font color="white"><bold>Enter the details:</bold></font></p>
+<link rel="stylesheet" type="text/css" href="style1.css">
+<body>
+
+<div class="background">
+  <div class="transbox">
+<div class="container">
+  <form action="/action_page.php">
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+	
+	 <label for="emailid">Email Id</label>
+    <input type="text" id="emailid" name="emailid" placeholder="Your email id..">
+	<label for="phno">Phone Number</label>
+    <input type="text" id="phno" name="phno" placeholder="Your phone number..">
+
+    <label for="ground">T/B</label>
+    <select id="ground" name="ground">
+      <option value=" turf 1"> TURF 1</option>
+      <option value=" turf 2">TURF 2</option>
+      <option value="badminton 1">BADMINTON 1</option>
+	  <option value="badminton 2">BADMINTON 2</option>
+	  <option value="badminton 3">BADMINTON 3</option>
+    </select>
+	<br>
+	<label for="fname">DATE</label>
+	<input type="date" id="arrive" class="floatLabel" name="arrive" value="<?php echo date('Y-m-d'); ?>">
+        <label for="arrive" class="label-date"><i class="fa fa-calendar"></i>&nbsp;&nbsp;</label>
+	<br>
+	Select a time: <input type="time" name="usr_time">
+  
+    <input type="submit" value="Submit">
+  </form>
+  </div>
+</div>
+
+</body>
+  </center></div>
+</div>
+</body></html>
+<br>
+</br>
+<br>
+</br>
+
+<hr>
+<h2 style="color:red;"><center><img src ="https://scontent-yyz1-1.cdninstagram.com/vp/29c0b9c006f865b1b7aa91bb40f531b9/5E04E678/t51.2885-19/s150x150/54512304_2308277056108478_2171119699138445312_n.jpg?_nc_ht=scontent-yyz1-1.cdninstagram.com" alt="logo" height="25" width="25" /><kbd>ALBERTIAN INSTITUTE OF SCIENCE AND TECHNOLOGY</kbd></center></h2>
+<h3 style="color:green;"><center><code>(AISAT)-TECHNICAL CAMPUS</code></center></h3>
+<h3 style="color:yellow;"><center><code>ARCHBISHOP ANGEL MARY MARY NAGAR</code></center></h3>
+<h3 style="color:mediumspringgreen;"><center><code>COCHIN UNIVERSITY P.O,KOCHI-6820 22</code></center></h3>
+<h3 style="color:aqua;"><center><code>Kerala,INDIA</center></code></h3>
+<p><a
+href="https://www.aisat.ac.in"><center><mark>visit
+our college website</mark></center></a></p>
+</body>
+</html>

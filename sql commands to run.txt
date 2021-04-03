@@ -1,0 +1,34 @@
+CREATE DATABASE tdatabase;
+USE tdatabase;
+CREATE TABLE user_login (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  username varchar(255) NOT NULL,
+  Password varchar(100) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY username (username)
+);
+
+INSERT INTO user_login (username,Password) VALUES ('scms','Password@123');
+CREATE TABLE bookings(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  firstname varchar(255) NOT NULL,
+  secondname varchar(100) NOT NULL,
+  emailid varchar(35) NOT NULL,
+  phone int(10) NOT NULL,
+  tb varchar(20) NOT NULL,
+  tdate DATE NOT NULL,
+  ttime TIME NOT NULL,
+  request TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+);
+ 
+CREATE TABLE timetable (
+  datee varchar(20) NOT NULL ,
+  turf1 varchar(25) NOT NULL,
+  turf2 varchar(25) NOT NULL,
+  court1 varchar(25) NOT NULL,
+  court2 varchar(25) NOT NULL,
+  court3 varchar(25) NOT NULL
+);
+
+
