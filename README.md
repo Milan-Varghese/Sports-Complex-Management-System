@@ -2,6 +2,6 @@
 Mini project
 
 Languages used :
-html + css
-php
+html + css,
+php,
 Js
